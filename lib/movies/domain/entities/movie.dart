@@ -1,4 +1,6 @@
-class Movie {
+import 'package:equatable/equatable.dart';
+
+class Movie extends Equatable {
   final String backdropPath;
   final List<int> genreIds;
   final int id;
@@ -17,29 +19,16 @@ class Movie {
     required this.releaseDate,
   });
 
-
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is Movie &&
-          runtimeType == other.runtimeType &&
-          backdropPath == other.backdropPath &&
-          genreIds == other.genreIds &&
-          id == other.id &&
-          overview == other.overview &&
-          title == other.title &&
-          releaseDate == other.releaseDate &&
-          voteAverage == other.voteAverage;
-
-  @override
-  int get hashCode =>
-      backdropPath.hashCode ^
-      genreIds.hashCode ^
-      id.hashCode ^
-      overview.hashCode ^
-      title.hashCode ^
-      releaseDate.hashCode ^
-      voteAverage.hashCode;
+  List<Object> get props => [
+        backdropPath,
+        genreIds,
+        id,
+        overview,
+        title,
+        releaseDate,
+        voteAverage,
+      ];
 
 //
 // Movie.fromJson(Map<String, dynamic> json) {
@@ -63,8 +52,5 @@ class Movie {
 //   data['vote_average'] = this.voteAverage;
 //   return data;
 // }
-
-
-
 
 }
