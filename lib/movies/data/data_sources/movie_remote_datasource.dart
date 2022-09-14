@@ -4,12 +4,16 @@ import 'package:movie_app_with_clean_architecture/core/network/api_constance.dar
 import 'package:movie_app_with_clean_architecture/core/network/error_message_model.dart';
 import 'package:movie_app_with_clean_architecture/movies/data/models/movie_model.dart';
 
+import '../models/movie_details_model.dart';
+
 abstract class BaseMovieRemoteDataSource {
   Future<List<MovieModel>> getNowPlayingMovies();
 
   Future<List<MovieModel>> getPopularMovies();
 
   Future<List<MovieModel>> getTopRatedMovies();
+
+  Future<MovieDetailsModel> getDetailsMovie(int movieId);
 }
 
 class MovieRemoteDataSource implements BaseMovieRemoteDataSource {
@@ -34,10 +38,11 @@ class MovieRemoteDataSource implements BaseMovieRemoteDataSource {
     } else {
       throw ServerException(
           errorMessageModel: ErrorMessageModel.fromJson(response.data));
-    }  }
+    }
+  }
 
   @override
-  Future<List<MovieModel>> getTopRatedMovies() async{
+  Future<List<MovieModel>> getTopRatedMovies() async {
     var response = await Dio().get(ApiConstance.topRatedMoviesPath);
     if (response.statusCode == 200) {
       return List<MovieModel>.from((response.data['results'] as List)
@@ -45,5 +50,17 @@ class MovieRemoteDataSource implements BaseMovieRemoteDataSource {
     } else {
       throw ServerException(
           errorMessageModel: ErrorMessageModel.fromJson(response.data));
-    }  }
+    }
+  }
+
+  @override
+  Future<MovieDetailsModel> getDetailsMovie(int movieId) async {
+    var response = await Dio().get(ApiConstance.detailsMoviePath(movieId));
+    if (response.statusCode == 200) {
+      return MovieDetailsModel.fromJson(response.data);
+    } else {
+      throw ServerException(
+          errorMessageModel: ErrorMessageModel.fromJson(response.data));
+    }
+  }
 }

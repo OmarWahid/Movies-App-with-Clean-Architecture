@@ -10,7 +10,7 @@ class GetTopRatedMoviesUseCase {
 
   GetTopRatedMoviesUseCase(this.baseMovieRepository);
 
-  Future<Either<Failure ,List<Movie>>> execute() async {
+  Future<Either<Failure ,List<Movie>>> call() async {
     return await baseMovieRepository.getTopRatedMovies();
   }
 }
