@@ -32,20 +32,21 @@ class MovieDetail extends Equatable {
         title,
         voteAverage,
       ];
-
-
 }
 
-class Genres {
-  int? id;
-  String? name;
+class Genres extends Equatable {
+  final int id;
+  final String name;
 
-  Genres({this.id, this.name});
+  const Genres({required this.id, required this.name});
 
-  Genres.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-  }
+  factory Genres.fromJson(Map<String, dynamic> json) => Genres(
+        id: json['id'],
+        name: json['name'],
+      );
+
+  @override
+  List<Object> get props => [id, name];
 }
 
 // class MovieDetail {

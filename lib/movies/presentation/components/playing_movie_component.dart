@@ -6,7 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/network/api_constance.dart';
 import '../../../core/utills/color_manager.dart';
 import '../../../core/utills/enums_manager.dart';
-import '../controller/movie_bloc.dart';
+import '../controller/movie_bloc/movie_bloc.dart';
+import '../screens/movie_details_screen.dart';
 
 class PlayingMovieComponent extends StatelessWidget {
   const PlayingMovieComponent({Key? key}) : super(key: key);
@@ -41,7 +42,9 @@ class PlayingMovieComponent extends StatelessWidget {
                     return GestureDetector(
                       key: const Key('openMovieMinimalDetail'),
                       onTap: () {
-                        /// TODO : NAVIGATE TO MOVIE DETAILS
+                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+                          return MovieDetailScreen(id: item.id);
+                        }));
                       },
                       child: Stack(
                         children: [

@@ -5,7 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../core/network/api_constance.dart';
 import '../../../core/utills/enums_manager.dart';
-import '../controller/movie_bloc.dart';
+import '../controller/movie_bloc/movie_bloc.dart';
+import '../screens/movie_details_screen.dart';
 
 class TopRatedMovieComponent extends StatelessWidget {
   const TopRatedMovieComponent({Key? key}) : super(key: key);
@@ -62,7 +63,9 @@ class TopRatedMovieComponent extends StatelessWidget {
                       padding: const EdgeInsets.only(right: 8.0),
                       child: InkWell(
                         onTap: () {
-                          /// TODO : NAVIGATE TO  MOVIE DETAILS
+                          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+                            return MovieDetailScreen(id: movie.id);
+                          }));
                         },
                         child: ClipRRect(
                           borderRadius:

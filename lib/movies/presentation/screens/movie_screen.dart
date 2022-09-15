@@ -6,7 +6,7 @@ import '../../../core/services/services_locator.dart';
 import '../../../core/utills/color_manager.dart';
 import '../components/popular_movie_component.dart';
 import '../components/top_rated_movie_component.dart';
-import '../controller/movie_bloc.dart';
+import '../controller/movie_bloc/movie_bloc.dart';
 
 class MovieScreen extends StatelessWidget {
   const MovieScreen({Key? key}) : super(key: key);
@@ -20,7 +20,6 @@ class MovieScreen extends StatelessWidget {
         ..add(GetTopRatedMoviesEvent()),
 
       child: Scaffold(
-        backgroundColor: ColorManager.darkGrey,
         body: SingleChildScrollView(
           key: const Key('movieScrollView'),
           child: Column(
@@ -28,7 +27,7 @@ class MovieScreen extends StatelessWidget {
             children: [
               const PlayingMovieComponent(),
               Container(
-                margin: const EdgeInsets.fromLTRB(16.0, 10.0, 16.0, 8.0),
+                margin: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -120,7 +119,7 @@ class MovieScreen extends StatelessWidget {
                 ),
               ),
               const TopRatedMovieComponent(),
-              const SizedBox(height: 50.0),
+              const SizedBox(height: 20.0),
             ],
           ),
         ),

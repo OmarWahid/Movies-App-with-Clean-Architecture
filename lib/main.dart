@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'core/services/services_locator.dart';
+import 'core/utills/color_manager.dart';
 import 'movies/presentation/screens/movie_screen.dart';
 
 void main() {
@@ -15,7 +16,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.grey,
+        scaffoldBackgroundColor: ColorManager.darkGrey,
+        appBarTheme: const AppBarTheme(
+          iconTheme: IconThemeData(color: Colors.white),
+          elevation: 0,
+        ),
       ),
       home: const MovieScreen(),
     );
