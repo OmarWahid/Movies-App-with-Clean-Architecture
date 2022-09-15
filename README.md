@@ -1,5 +1,4 @@
 # movie_app_with_clean_architecture
-
 This app was created by
 
 1- CLEAN ARCHITECTURE
@@ -18,4 +17,4 @@ This app was created by
 
 8- GIT_IT
 
-AND MORE...
+AND MORE ...
