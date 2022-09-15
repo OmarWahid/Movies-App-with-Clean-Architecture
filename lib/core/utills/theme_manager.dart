@@ -8,51 +8,53 @@ import 'values_manager.dart';
 ThemeData getApplicationTheme() {
   return ThemeData(
     // main colors
-    primaryColor: ColorManager.primary,
-    primaryColorLight: ColorManager.lightPrimary,
-    primaryColorDark: ColorManager.darkPrimary,
-    disabledColor: ColorManager.grey1,
-    splashColor: ColorManager.lightPrimary,
-    // ripple effect color
-    // cardview theme
-    cardTheme: CardTheme(
-        color: ColorManager.white,
-        shadowColor: ColorManager.grey,
+    primaryColor: AppColor.primary,
+    primaryColorLight: AppColor.lightPrimary,
+    primaryColorDark: AppColor.darkPrimary,
+    disabledColor: AppColor.grey1,
+    splashColor: AppColor.lightPrimary, // ripple effect color
+
+    // card view theme
+    cardTheme: const CardTheme(
+        color: AppColor.white,
+        shadowColor: AppColor.grey,
         elevation: AppSize.s4),
+
     // app bar theme
     appBarTheme: AppBarTheme(
         centerTitle: true,
-        color: ColorManager.primary,
+        color: AppColor.primary,
         elevation: AppSize.s4,
-        shadowColor: ColorManager.lightPrimary,
+        shadowColor: AppColor.lightPrimary,
         titleTextStyle:
-            getRegularStyle(fontSize: FontSize.s16, color: ColorManager.white)),
+            getRegularStyle(fontSize: AppFontSize.s16, color: AppColor.white)),
+
     // button theme
-    buttonTheme: ButtonThemeData(
-        shape: const StadiumBorder(),
-        disabledColor: ColorManager.grey1,
-        buttonColor: ColorManager.primary,
-        splashColor: ColorManager.lightPrimary),
+    buttonTheme: const ButtonThemeData(
+        shape: StadiumBorder(),
+        disabledColor: AppColor.grey1,
+        buttonColor: AppColor.primary,
+        splashColor: AppColor.lightPrimary),
 
     // elevated button them
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
             textStyle: getRegularStyle(
-                color: ColorManager.white, fontSize: FontSize.s17),
-            backgroundColor: ColorManager.primary,
+                color: AppColor.white, fontSize: AppFontSize.s17),
+            backgroundColor: AppColor.primary,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(AppSize.s12)))),
 
     // text theme
     textTheme: TextTheme(
         displayLarge:
-            getLightStyle(color: ColorManager.white, fontSize: FontSize.s22),
+            getLightStyle(color: AppColor.white, fontSize: AppFontSize.s22),
         headlineLarge: getSemiBoldStyle(
-            color: ColorManager.darkGrey, fontSize: FontSize.s16),
+            color: AppColor.darkGrey, fontSize: AppFontSize.s16),
         titleMedium: getMediumStyle(
-            color: ColorManager.lightGrey, fontSize: FontSize.s14),
-        bodyLarge: getRegularStyle(color: ColorManager.grey1),
-        bodySmall: getRegularStyle(color: ColorManager.grey)),
+            color: AppColor.lightGrey, fontSize: AppFontSize.s14),
+        bodyLarge: getRegularStyle(color: AppColor.grey1),
+        bodySmall: getRegularStyle(color: AppColor.grey)),
 
     // input decoration theme (text form field)
     inputDecorationTheme: InputDecorationTheme(
@@ -60,33 +62,33 @@ ThemeData getApplicationTheme() {
         contentPadding: const EdgeInsets.all(AppPadding.p8),
         // hint style
         hintStyle:
-            getRegularStyle(color: ColorManager.grey, fontSize: FontSize.s14),
+            getRegularStyle(color: AppColor.grey, fontSize: AppFontSize.s14),
         labelStyle:
-            getMediumStyle(color: ColorManager.grey, fontSize: FontSize.s14),
-        errorStyle: getRegularStyle(color: ColorManager.error),
+            getMediumStyle(color: AppColor.grey, fontSize: AppFontSize.s14),
+        errorStyle: getRegularStyle(color: AppColor.error),
 
         // enabled border style
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
             borderSide:
-                BorderSide(color: ColorManager.primary, width: AppSize.s1_5),
-            borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8))),
+                BorderSide(color: AppColor.primary, width: AppSize.s1_5),
+            borderRadius: BorderRadius.all(Radius.circular(AppSize.s8))),
 
         // focused border style
-        focusedBorder: OutlineInputBorder(
+        focusedBorder: const OutlineInputBorder(
             borderSide:
-                BorderSide(color: ColorManager.grey, width: AppSize.s1_5),
-            borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8))),
+                BorderSide(color: AppColor.grey, width: AppSize.s1_5),
+            borderRadius: BorderRadius.all(Radius.circular(AppSize.s8))),
 
         // error border style
-        errorBorder: OutlineInputBorder(
+        errorBorder: const OutlineInputBorder(
             borderSide:
-                BorderSide(color: ColorManager.error, width: AppSize.s1_5),
-            borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8))),
+                BorderSide(color: AppColor.error, width: AppSize.s1_5),
+            borderRadius: BorderRadius.all(Radius.circular(AppSize.s8))),
         // focused border style
-        focusedErrorBorder: OutlineInputBorder(
+        focusedErrorBorder: const OutlineInputBorder(
             borderSide:
-                BorderSide(color: ColorManager.primary, width: AppSize.s1_5),
-            borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8)))),
+                BorderSide(color: AppColor.primary, width: AppSize.s1_5),
+            borderRadius: BorderRadius.all(Radius.circular(AppSize.s8)))),
     // label style
   );
 }

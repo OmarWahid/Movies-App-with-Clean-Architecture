@@ -2,11 +2,14 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app_with_clean_architecture/core/utills/color_manager.dart';
+import 'package:movie_app_with_clean_architecture/core/utills/constants_manager.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../core/network/api_constance.dart';
 import '../../../core/utills/enums_manager.dart';
+import '../../../core/utills/routes_manager.dart';
+import '../../../core/utills/values_manager.dart';
 import '../controller/movie_bloc/movie_bloc.dart';
-import '../screens/movie_details_screen.dart';
 
 class TopRatedMovieComponent extends StatelessWidget {
   const TopRatedMovieComponent({Key? key}) : super(key: key);
@@ -21,68 +24,75 @@ class TopRatedMovieComponent extends StatelessWidget {
         switch (state.nowPlayingState) {
           case RequestState.loading:
             return Container(
-              color: Colors.transparent,
-              height: 170.0,
+              color: AppColor.transparent,
+              height: AppSize.s170,
               child: ListView.separated(
-                  itemCount: 10,
+                  itemCount: AppConstants.cI10,
                   scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: AppPadding.p16),
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
                     return Shimmer.fromColors(
-                      baseColor: Colors.grey[850]!,
-                      highlightColor: Colors.grey[800]!,
+                      baseColor: Colors.grey[AppConstants.colorValue850]!,
+                      highlightColor: Colors.grey[AppConstants.colorValue800]!,
                       child: Container(
-                        height: 170.0,
-                        width: 120.0,
+                        height: AppSize.s170,
+                        width: AppSize.s120,
                         decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(8.0),
+                          color: AppColor.black,
+                          borderRadius: BorderRadius.circular(AppSize.s8),
                         ),
                       ),
                     );
                   },
                   separatorBuilder: (context, index) {
-                    return const SizedBox(width: 8.0);
+                    return const SizedBox(width: AppSize.s8);
                   }),
             );
           case RequestState.loaded:
             return FadeIn(
-              duration: const Duration(milliseconds: 500),
+              duration: const Duration(milliseconds: AppConstants.fadeDelay),
               child: SizedBox(
-                height: 170.0,
+                height: AppSize.s170,
                 child: ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   physics: const BouncingScrollPhysics(),
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: AppPadding.p16),
                   itemCount: state.topRatedMovies.length,
                   itemBuilder: (context, index) {
                     final movie = state.topRatedMovies[index];
                     return Container(
-                      padding: const EdgeInsets.only(right: 8.0),
+                      padding: const EdgeInsets.only(right: AppPadding.p8),
                       child: InkWell(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-                            return MovieDetailScreen(id: movie.id);
-                          }));
+                          Navigator.pushNamed(
+                            context,
+                            Routes.movieDetailsRoute,
+                            arguments: movie.id,
+                          );
                         },
                         child: ClipRRect(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(8.0)),
+                          borderRadius: const BorderRadius.all(
+                              Radius.circular(AppSize.s8)),
                           child: CachedNetworkImage(
-                            width: 120.0,
+                            width: AppSize.s120,
                             fit: BoxFit.cover,
                             imageUrl: ApiConstance.imageUrl(movie.backdropPath),
                             placeholder: (context, url) => Shimmer.fromColors(
-                              baseColor: Colors.grey[850]!,
-                              highlightColor: Colors.grey[800]!,
+                              baseColor:
+                                  Colors.grey[AppConstants.colorValue850]!,
+                              highlightColor:
+                                  Colors.grey[AppConstants.colorValue800]!,
                               child: Container(
-                                height: 170.0,
-                                width: 120.0,
+                                height: AppSize.s170,
+                                width: AppSize.s120,
                                 decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  borderRadius: BorderRadius.circular(8.0),
+                                  color: AppColor.black,
+                                  borderRadius:
+                                      BorderRadius.circular(AppSize.s8),
                                 ),
                               ),
                             ),
@@ -98,7 +108,7 @@ class TopRatedMovieComponent extends StatelessWidget {
             );
           case RequestState.error:
             return SizedBox(
-              height: 400.0,
+              height: AppSize.s400,
               child: Center(child: Text(state.nowPlayingMessage)),
             );
         }

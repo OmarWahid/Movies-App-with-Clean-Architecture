@@ -1,52 +1,49 @@
-// import 'package:flutter/material.dart';
-// import '../forgot_password/forgot_password_view.dart';
-// import '../login/login_view.dart';
-// import '../main/main_view.dart';
-// import '../onboarding/onboarding_view.dart';
-// import '../register/register_view.dart';
-// import '../splash/splash_view.dart';
-// import '../store_details/store_details_view.dart';
-// import 'strings_manager.dart';
-//
-// class Routes {
-//   static const String splashRoute = "/";
-//   static const String loginRoute = "/login";
-//   static const String registerRoute = "/register";
-//   static const String forgotPasswordRoute = "/forgotPassword";
-//   static const String onBoardingRoute = "/onBoarding";
-//   static const String mainRoute = "/main";
-//   static const String storeDetailsRoute = "/storeDetails";
-// }
-//
-// class RouteGenerator {
-//   static Route<dynamic> getRoute(RouteSettings settings) {
-//     switch (settings.name) {
-//       case Routes.splashRoute:
-//         return MaterialPageRoute(builder: (_) => const SplashView());
-//       case Routes.loginRoute:
-//         return MaterialPageRoute(builder: (_) => const LoginView());
-//       case Routes.onBoardingRoute:
-//         return MaterialPageRoute(builder: (_) => const OnBoardingView());
-//       case Routes.registerRoute:
-//         return MaterialPageRoute(builder: (_) => const RegisterView());
-//       case Routes.forgotPasswordRoute:
-//         return MaterialPageRoute(builder: (_) => const ForgotPasswordView());
-//       case Routes.mainRoute:
-//         return MaterialPageRoute(builder: (_) => const MainView());
-//       case Routes.storeDetailsRoute:
-//         return MaterialPageRoute(builder: (_) => const StoreDetailsView());
-//       default:
-//         return unDefinedRoute();
-//     }
-//   }
-//
-//   static Route<dynamic> unDefinedRoute() {
-//     return MaterialPageRoute(
-//         builder: (_) => Scaffold(
-//               appBar: AppBar(
-//                 title: const Text(AppStrings.noRouteFound),
-//               ),
-//               body: const Center(child: Text(AppStrings.noRouteFound)),
-//             ));
-//   }
-// }
+import 'package:flutter/material.dart';
+import 'package:movie_app_with_clean_architecture/movies/presentation/screens/movie_screen.dart';
+import '../../movies/presentation/screens/movie_details_screen.dart';
+import '../../movies/presentation/screens/movie_popular_screen.dart';
+import '../../movies/presentation/screens/movie_top_rated_screen..dart';
+import 'strings_manager.dart';
+
+class Routes {
+  static const String movieRoute = "/";
+  static const String movieDetailsRoute = "/movieDetails";
+  static const String movieTopRatedRoute = "/movieTopRated";
+  static const String moviePopularRoute = "/moviePopular";
+  static const String forgotPasswordRoute = "/forgotPassword";
+  static const String onBoardingRoute = "/onBoarding";
+  static const String mainRoute = "/main";
+  static const String storeDetailsRoute = "/storeDetails";
+}
+
+class RouteGenerator {
+  static Route<dynamic> getRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case Routes.movieRoute:
+        return MaterialPageRoute(builder: (_) => const MovieScreen());
+
+      case Routes.movieDetailsRoute:
+        return MaterialPageRoute(
+            builder: (_) => MovieDetailScreen(id: settings.arguments as int));
+
+      case Routes.movieTopRatedRoute:
+        return MaterialPageRoute(builder: (_) => const MovieTopRatedScreen());
+
+      case Routes.moviePopularRoute:
+        return MaterialPageRoute(builder: (_) => const MoviePopularScreen());
+
+      default:
+        return unDefinedRoute();
+    }
+  }
+
+  static Route<dynamic> unDefinedRoute() {
+    return MaterialPageRoute(
+        builder: (_) => Scaffold(
+              appBar: AppBar(
+                title: const Text(AppStrings.noRouteFound),
+              ),
+              body: const Center(child: Text(AppStrings.noRouteFound)),
+            ));
+  }
+}

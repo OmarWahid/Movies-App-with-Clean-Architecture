@@ -3,6 +3,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movie_app_with_clean_architecture/core/utills/constants_manager.dart';
+import 'package:movie_app_with_clean_architecture/core/utills/font_manager.dart';
+import 'package:movie_app_with_clean_architecture/core/utills/routes_manager.dart';
+import 'package:movie_app_with_clean_architecture/core/utills/strings_manager.dart';
+import 'package:movie_app_with_clean_architecture/core/utills/values_manager.dart';
 import 'package:movie_app_with_clean_architecture/movies/presentation/controller/movie_details_bloc/movie_details_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../core/network/api_constance.dart';
@@ -19,11 +24,11 @@ class MovieDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      lazy: false,
       create: (context) => sl<MovieDetailsBloc>()
         ..add(GetMovieDetailsEvent(id))
         ..add(GetMovieRecommendationEvent(id)),
       child: const Scaffold(
+        backgroundColor: AppColor.blueBlack,
         body: MovieDetailContent(),
       ),
     );
@@ -46,36 +51,42 @@ class MovieDetailContent extends StatelessWidget {
           );
         case RequestState.loaded:
           return CustomScrollView(
-            key: const Key('movieDetailScrollView'),
-            physics: const BouncingScrollPhysics(),
+            key: const Key(AppConstants.keyDetailsScroll),
             slivers: [
               SliverAppBar(
                 pinned: true,
-                expandedHeight: 250.0,
-                backgroundColor: ColorManager.darkGrey,
-                elevation: 0,
+                expandedHeight: AppSize.s250,
+                backgroundColor: AppColor.blueBlack,
+                elevation: AppConstants.noElevation,
                 flexibleSpace: FlexibleSpaceBar(
                   background: FadeIn(
-                    duration: const Duration(milliseconds: 500),
+                    duration:
+                        const Duration(milliseconds: AppConstants.fadeDelay),
                     child: ShaderMask(
                       shaderCallback: (rect) {
                         return const LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: [
-                            Colors.transparent,
-                            Colors.black,
-                            Colors.black,
-                            Colors.transparent,
+                            AppColor.transparent,
+                            AppColor.black,
+                            AppColor.black,
+                            AppColor.transparent,
                           ],
-                          stops: [0.0, 0.5, 1.0, 1.0],
+                          stops: [
+                            AppConstants.cD0,
+                            AppConstants.cD0_5,
+                            AppConstants.cD1,
+                            AppConstants.cD1,
+                          ],
                         ).createShader(
-                          Rect.fromLTRB(0.0, 0.0, rect.width, rect.height),
+                          Rect.fromLTRB(
+                              AppSize.s0, AppSize.s0, rect.width, rect.height),
                         );
                       },
                       blendMode: BlendMode.dstIn,
                       child: CachedNetworkImage(
-                        width: MediaQuery.of(context).size.width,
+                        width: double.infinity,
                         imageUrl: ApiConstance.imageUrl(
                             state.movieDetail!.backdropPath),
                         fit: BoxFit.cover,
@@ -86,102 +97,103 @@ class MovieDetailContent extends StatelessWidget {
               ),
               SliverToBoxAdapter(
                 child: FadeInUp(
-                  from: 20,
-                  duration: const Duration(milliseconds: 500),
+                  from: AppConstants.fadeInFrom,
+                  duration:
+                      const Duration(milliseconds: AppConstants.fadeDelay),
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(AppPadding.p16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(state.movieDetail!.title,
                             style: GoogleFonts.poppins(
-                              fontSize: 23,
-                              fontWeight: FontWeight.w700,
-                              color: ColorManager.white,
-                              letterSpacing: 1.2,
+                              fontSize: AppFontSize.s24,
+                              fontWeight: AppFontWeight.bold,
+                              color: AppColor.white,
+                              letterSpacing: AppFontSize.s1_2,
                             )),
-                        const SizedBox(height: 8.0),
+                        const SizedBox(height: AppSize.s8),
                         Row(
                           children: [
                             Container(
                               padding: const EdgeInsets.symmetric(
-                                vertical: 2.0,
-                                horizontal: 8.0,
+                                vertical: AppPadding.p2,
+                                horizontal: AppPadding.p8,
                               ),
                               decoration: BoxDecoration(
-                                color: Colors.grey[800],
-                                borderRadius: BorderRadius.circular(4.0),
+                                color: Colors.grey[AppConstants.colorValue800],
+                                borderRadius: BorderRadius.circular(AppSize.s4),
                               ),
                               child: Text(
-                                state.movieDetail!.releaseDate.split('-')[0],
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w500,
-                                  color: ColorManager.white,
+                                state.movieDetail!.releaseDate.split('-')[AppConstants.cI0],
+                                style: const TextStyle(
+                                  fontSize: AppFontSize.s16,
+                                  fontWeight: AppFontWeight.medium,
+                                  color: AppColor.white,
                                 ),
                               ),
                             ),
-                            const SizedBox(width: 16.0),
+                            const SizedBox(width: AppSize.s16),
                             Row(
                               children: [
                                 const Icon(
                                   Icons.star,
-                                  color: Colors.amber,
-                                  size: 20.0,
+                                  color: AppColor.amber,
+                                  size: AppSize.s20,
                                 ),
-                                const SizedBox(width: 4.0),
+                                const SizedBox(width: AppSize.s4),
                                 Text(
-                                  (state.movieDetail!.voteAverage / 2)
-                                      .toStringAsFixed(1),
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w500,
-                                    color: ColorManager.white,
-                                    letterSpacing: 1.2,
+                                  (state.movieDetail!.voteAverage / AppConstants.cI2)
+                                      .toStringAsFixed(AppConstants.cI1),
+                                  style: const TextStyle(
+                                    fontSize: AppFontSize.s16,
+                                    fontWeight: AppFontWeight.medium,
+                                    color: AppColor.white,
+                                    letterSpacing: AppFontSize.s1_2,
                                   ),
                                 ),
-                                const SizedBox(width: 4.0),
+                                const SizedBox(width: AppSize.s4),
                                 Text(
                                   '(${state.movieDetail!.voteAverage})',
-                                  style: TextStyle(
-                                    fontSize: 1.0,
-                                    fontWeight: FontWeight.w500,
-                                    letterSpacing: 1.2,
-                                    color: ColorManager.white,
+                                  style: const TextStyle(
+                                    fontSize: AppFontSize.s1,
+                                    fontWeight: AppFontWeight.medium,
+                                    letterSpacing: AppFontSize.s1_2,
+                                    color: AppColor.white,
                                   ),
                                 ),
                               ],
                             ),
-                            const SizedBox(width: 16.0),
+                            const SizedBox(width: AppSize.s16),
                             Text(
                               _showDuration(state.movieDetail!.runtime),
                               style: const TextStyle(
-                                color: Colors.white70,
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: 1.2,
+                                color: AppColor.white70,
+                                fontSize: AppFontSize.s16,
+                                fontWeight: AppFontWeight.medium,
+                                letterSpacing: AppFontSize.s1_2,
                               ),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 20.0),
+                        const SizedBox(height: AppSize.s20),
                         Text(
                           state.movieDetail!.overview,
-                          style: TextStyle(
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.w400,
-                            letterSpacing: 1.2,
-                            color: ColorManager.white,
+                          style: const TextStyle(
+                            fontSize: AppFontSize.s14,
+                            fontWeight: AppFontWeight.regular,
+                            letterSpacing: AppFontSize.s1_2,
+                            color: AppColor.white,
                           ),
                         ),
-                        const SizedBox(height: 8.0),
+                        const SizedBox(height: AppSize.s8),
                         Text(
-                          'Genres: ${_showGenres(state.movieDetail!.genres)}',
+                          '${AppStrings.genres} ${_showGenres(state.movieDetail!.genres)}',
                           style: const TextStyle(
-                            color: Colors.white70,
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.w500,
-                            letterSpacing: 1.2,
+                            color: AppColor.white70,
+                            fontSize: AppFontSize.s12,
+                            fontWeight: AppFontWeight.medium,
+                            letterSpacing: AppFontSize.s1_2,
                           ),
                         ),
                       ],
@@ -190,18 +202,24 @@ class MovieDetailContent extends StatelessWidget {
                 ),
               ),
               SliverPadding(
-                padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 24.0),
+                padding: const EdgeInsets.fromLTRB(
+                  AppPadding.p16,
+                  AppPadding.p16,
+                  AppPadding.p16,
+                  AppPadding.p24,
+                ),
                 sliver: SliverToBoxAdapter(
                   child: FadeInUp(
-                    from: 20,
-                    duration: const Duration(milliseconds: 500),
-                    child: Text(
-                      'More like this'.toUpperCase(),
+                    from: AppConstants.fadeInFrom,
+                    duration:
+                        const Duration(milliseconds: AppConstants.fadeDelay),
+                    child: const Text(
+                      AppStrings.moreLike,
                       style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w500,
-                        color: ColorManager.white,
-                        letterSpacing: 1.2,
+                        fontSize: AppFontSize.s16,
+                        fontWeight: AppFontWeight.medium,
+                        color: AppColor.white,
+                        letterSpacing: AppFontSize.s1_2,
                       ),
                     ),
                   ),
@@ -209,7 +227,12 @@ class MovieDetailContent extends StatelessWidget {
               ),
               // Tab(text: 'More like this'.toUpperCase()),
               SliverPadding(
-                padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 24.0),
+                padding: const EdgeInsets.fromLTRB(
+                  AppPadding.p16,
+                  AppPadding.p16,
+                  AppPadding.p16,
+                  AppPadding.p24,
+                ),
                 sliver: _showRecommendations(),
               ),
             ],
@@ -261,68 +284,69 @@ class MovieDetailContent extends StatelessWidget {
           if (state.movieRecommendations!.isEmpty) {
             return SliverGrid(
               delegate: SliverChildBuilderDelegate(
-                    (context, index) => Center(
-                    child: FadeInUp(
-                      from: 20,
-                      duration: const Duration(milliseconds: 500),
-                      child: Text(
-                        'No recommendations',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w600,
-                          color: ColorManager.white,
-                          letterSpacing: 1.2,
-                          height: 1
-                        ),
+                (context, index) => Center(
+                  child: FadeInUp(
+                    from: AppConstants.fadeInFrom,
+                    duration:
+                        const Duration(milliseconds: AppConstants.fadeDelay),
+                    child: const Text(
+                      AppStrings.noRecommendations,
+                      style: TextStyle(
+                        fontSize: AppFontSize.s18,
+                        fontWeight: AppFontWeight.semiBold,
+                        color: AppColor.white,
+                        letterSpacing: AppFontSize.s1_2,
+                        height: AppFontSize.s1,
                       ),
                     ),
                   ),
-                childCount: 1,
+                ),
+                childCount: AppConstants.cI1,
               ),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 1,
-                childAspectRatio: 1.8,
+                crossAxisCount: AppConstants.cI1,
+                childAspectRatio: AppConstants.cD1_8,
               ),
             );
           }
-            return SliverGrid(
+          return SliverGrid(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
                 final recommendation = state.movieRecommendations![index];
                 return FadeInUp(
-                  from: 20,
-                  duration: const Duration(milliseconds: 500),
+                  from: AppConstants.fadeInFrom,
+                  duration:
+                      const Duration(milliseconds: AppConstants.fadeDelay),
                   child: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                    borderRadius:
+                        const BorderRadius.all(Radius.circular(AppSize.s8)),
                     child: InkWell(
                       onTap: () {
-                        Navigator.pushReplacement(
+                        Navigator.pushReplacementNamed(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => MovieDetailScreen(
-                              id: recommendation.id,
-                            ),
-                          ),
+                          Routes.movieDetailsRoute,
+                          arguments: recommendation.id,
                         );
                       },
                       child: CachedNetworkImage(
                         imageUrl:
                             ApiConstance.imageUrl(recommendation.backdropPath!),
                         placeholder: (context, url) => Shimmer.fromColors(
-                          baseColor: Colors.grey[850]!,
-                          highlightColor: Colors.grey[800]!,
+                          baseColor: Colors.grey[AppConstants.colorValue850]!,
+                          highlightColor:
+                              Colors.grey[AppConstants.colorValue800]!,
                           child: Container(
-                            height: 170.0,
-                            width: 120.0,
+                            height: AppSize.s170,
+                            width: AppSize.s120,
                             decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(8.0),
+                              color: AppColor.black,
+                              borderRadius: BorderRadius.circular(AppSize.s8),
                             ),
                           ),
                         ),
                         errorWidget: (context, url, error) =>
                             const Icon(Icons.error),
-                        height: 180.0,
+                        height: AppSize.s170,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -332,10 +356,10 @@ class MovieDetailContent extends StatelessWidget {
               childCount: state.movieRecommendations!.length,
             ),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              mainAxisSpacing: 8.0,
-              crossAxisSpacing: 8.0,
-              childAspectRatio: 0.7,
-              crossAxisCount: 3,
+              mainAxisSpacing: AppSize.s8,
+              crossAxisSpacing: AppSize.s8,
+              childAspectRatio: AppSize.s0_7,
+              crossAxisCount: AppSize.s3,
             ),
           );
         case RequestState.error:

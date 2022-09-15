@@ -3,11 +3,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app_with_clean_architecture/core/utills/constants_manager.dart';
+import 'package:movie_app_with_clean_architecture/core/utills/font_manager.dart';
+import 'package:movie_app_with_clean_architecture/core/utills/strings_manager.dart';
+import 'package:movie_app_with_clean_architecture/core/utills/values_manager.dart';
 import '../../../core/network/api_constance.dart';
 import '../../../core/utills/color_manager.dart';
 import '../../../core/utills/enums_manager.dart';
+import '../../../core/utills/routes_manager.dart';
 import '../controller/movie_bloc/movie_bloc.dart';
-import '../screens/movie_details_screen.dart';
 
 class PlayingMovieComponent extends StatelessWidget {
   const PlayingMovieComponent({Key? key}) : super(key: key);
@@ -22,29 +26,31 @@ class PlayingMovieComponent extends StatelessWidget {
         switch (state.nowPlayingState) {
           case RequestState.loading:
             return const SizedBox(
-              height: 400.0,
+              height: AppSize.s400,
               child: Center(
                 child: CircularProgressIndicator(),
               ),
             );
           case RequestState.loaded:
             return FadeIn(
-              duration: const Duration(milliseconds: 500),
+              duration: const Duration(milliseconds: AppConstants.fadeDelay),
               child: CarouselSlider(
                 options: CarouselOptions(
-                  height: 400.0,
-                  viewportFraction: 1.0,
+                  height: AppSize.s400,
+                  viewportFraction: AppConstants.cD1,
                   autoPlay: true,
                   onPageChanged: (index, reason) {},
                 ),
                 items: state.nowPlayingMovies.map(
                   (item) {
                     return GestureDetector(
-                      key: const Key('openMovieMinimalDetail'),
+                      key: const Key(AppConstants.keyOpenMovieDetail),
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-                          return MovieDetailScreen(id: item.id);
-                        }));
+                        Navigator.pushNamed(
+                          context,
+                          Routes.movieDetailsRoute,
+                          arguments: item.id,
+                        );
                       },
                       child: Stack(
                         children: [
@@ -54,20 +60,29 @@ class PlayingMovieComponent extends StatelessWidget {
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
                                 colors: [
-                                  // fromLTRB
-                                  Colors.transparent,
-                                  Colors.black,
-                                  Colors.black,
-                                  Colors.transparent,
+                                  AppColor.transparent,
+                                  AppColor.black,
+                                  AppColor.black,
+                                  AppColor.transparent,
                                 ],
-                                stops: [0, 0.3, 0.5, 1],
+                                stops: [
+                                  AppConstants.cD0,
+                                  AppConstants.cD0_3,
+                                  AppConstants.cD0_5,
+                                  AppConstants.cD1,
+                                ],
                               ).createShader(
-                                Rect.fromLTRB(0, 0, rect.width, rect.height),
+                                Rect.fromLTRB(
+                                  AppConstants.cD0,
+                                  AppConstants.cD0,
+                                  rect.width,
+                                  rect.height,
+                                ),
                               );
                             },
                             blendMode: BlendMode.dstIn,
                             child: CachedNetworkImage(
-                              height: 560.0,
+                              height: AppSize.s560,
                               imageUrl:
                                   ApiConstance.imageUrl(item.backdropPath),
                               fit: BoxFit.cover,
@@ -79,34 +94,36 @@ class PlayingMovieComponent extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(bottom: 16.0),
+                                  padding: const EdgeInsets.only(
+                                      bottom: AppPadding.p16),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Icon(
+                                    children: const [
+                                      Icon(
                                         Icons.circle,
-                                        color: Colors.redAccent,
-                                        size: 16.0,
+                                        color: AppColor.redAccent,
+                                        size: AppSize.s16,
                                       ),
-                                      const SizedBox(width: 4.0),
+                                      SizedBox(width: AppSize.s4),
                                       Text(
-                                        'Now Playing'.toUpperCase(),
+                                        AppStrings.nowPlaying,
                                         style: TextStyle(
-                                          fontSize: 16.0,
-                                          color: ColorManager.white,
+                                          fontSize: AppSize.s16,
+                                          color: AppColor.white,
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(bottom: 16.0),
+                                  padding: const EdgeInsets.only(
+                                      bottom: AppPadding.p16),
                                   child: Text(
                                     item.title,
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 24,
-                                      color: ColorManager.white,
+                                    style: const TextStyle(
+                                      fontSize: AppFontSize.s24,
+                                      color: AppColor.white,
                                     ),
                                   ),
                                 ),
@@ -122,7 +139,7 @@ class PlayingMovieComponent extends StatelessWidget {
             );
           case RequestState.error:
             return SizedBox(
-              height: 400.0,
+              height: AppSize.s400,
               child: Center(child: Text(state.nowPlayingMessage)),
             );
         }
