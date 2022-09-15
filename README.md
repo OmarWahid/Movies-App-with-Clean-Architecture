@@ -1,16 +1,20 @@
 # movie_app_with_clean_architecture
+This app was created by
 
-A new Flutter project.
+1- CLEAN ARCHITECTURE
 
-## Getting Started
+2- API
 
-This project is a starting point for a Flutter application.
+3- MVVM
 
-A few resources to get you started if this is your first Flutter project:
+4- CLEAN CODE
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+5- NO HARD CODE
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+6- BLOC
+
+7- DIO
+
+8- GIT_IT
+
+AND MORE ...
