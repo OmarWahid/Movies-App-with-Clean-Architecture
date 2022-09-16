@@ -32,7 +32,11 @@ class MovieScreen extends StatelessWidget {
               const PlayingMovieComponent(),
               Container(
                 margin: const EdgeInsets.fromLTRB(
-                    AppMargin.m16, AppMargin.m12, AppMargin.m16, AppMargin.m10),
+                  AppMargin.m16,
+                  AppMargin.m12,
+                  AppMargin.m4,
+                  AppMargin.m10,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -79,7 +83,7 @@ class MovieScreen extends StatelessWidget {
                 margin: const EdgeInsets.fromLTRB(
                   AppMargin.m16,
                   AppMargin.m20,
-                  AppMargin.m16,
+                  AppMargin.m4,
                   AppMargin.m8,
                 ),
                 child: Row(
