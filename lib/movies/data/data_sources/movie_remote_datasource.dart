@@ -68,11 +68,14 @@ class MovieRemoteDataSource implements BaseMovieRemoteDataSource {
   }
 
   @override
-  Future<List<MovieRecommendationsModel>> getRecommendationsMovie(int movieId) async {
-    var response = await Dio().get(ApiConstance.recommendationsMoviePath(movieId));
+  Future<List<MovieRecommendationsModel>> getRecommendationsMovie(
+      int movieId) async {
+    var response =
+        await Dio().get(ApiConstance.recommendationsMoviePath(movieId));
     if (response.statusCode == 200) {
-      return List<MovieRecommendationsModel>.from((response.data['results'] as List)
-          .map((e) => MovieRecommendationsModel.fromJson(e)));
+      return List<MovieRecommendationsModel>.from(
+          (response.data['results'] as List)
+              .map((e) => MovieRecommendationsModel.fromJson(e)));
     } else {
       throw ServerException(
           errorMessageModel: ErrorMessageModel.fromJson(response.data));

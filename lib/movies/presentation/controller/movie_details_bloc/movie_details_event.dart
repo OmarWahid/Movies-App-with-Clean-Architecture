@@ -11,7 +11,6 @@ class GetMovieDetailsEvent extends MovieDetailsEvent {
 
   @override
   List<Object> get props => [id];
-
 }
 
 class GetMovieRecommendationEvent extends MovieDetailsEvent {
@@ -21,5 +20,4 @@ class GetMovieRecommendationEvent extends MovieDetailsEvent {
 
   @override
   List<Object> get props => [id];
-
 }

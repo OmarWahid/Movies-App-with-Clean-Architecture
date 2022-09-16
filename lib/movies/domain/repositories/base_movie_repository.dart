@@ -5,15 +5,14 @@ import '../entities/movie_detail.dart';
 import '../entities/movie_recommendations.dart';
 
 abstract class BaseMovieRepository {
-  Future<Either<Failure ,List<Movie>>> getNowPlayingMovies();
+  Future<Either<Failure, List<Movie>>> getNowPlayingMovies();
 
-  Future<Either<Failure ,List<Movie>>> getPopularMovies();
+  Future<Either<Failure, List<Movie>>> getPopularMovies();
 
-  Future<Either<Failure ,List<Movie>>> getTopRatedMovies();
+  Future<Either<Failure, List<Movie>>> getTopRatedMovies();
 
   Future<Either<Failure, MovieDetail>> getDetailsMovie(int movieId);
 
-  Future<Either<Failure, List<MovieRecommendations>>> getRecommendationsMovie(int movieId);
-
-
+  Future<Either<Failure, List<MovieRecommendations>>> getRecommendationsMovie(
+      int movieId);
 }

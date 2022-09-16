@@ -3,17 +3,17 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movie_app_with_clean_architecture/core/utills/constants_manager.dart';
-import 'package:movie_app_with_clean_architecture/core/utills/font_manager.dart';
-import 'package:movie_app_with_clean_architecture/core/utills/routes_manager.dart';
-import 'package:movie_app_with_clean_architecture/core/utills/strings_manager.dart';
-import 'package:movie_app_with_clean_architecture/core/utills/values_manager.dart';
+import 'package:movie_app_with_clean_architecture/core/utils/constants_manager.dart';
+import 'package:movie_app_with_clean_architecture/core/utils/font_manager.dart';
+import 'package:movie_app_with_clean_architecture/core/utils/routes_manager.dart';
+import 'package:movie_app_with_clean_architecture/core/utils/strings_manager.dart';
+import 'package:movie_app_with_clean_architecture/core/utils/values_manager.dart';
 import 'package:movie_app_with_clean_architecture/movies/presentation/controller/movie_details_bloc/movie_details_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../core/network/api_constance.dart';
 import '../../../core/services/services_locator.dart';
-import '../../../core/utills/color_manager.dart';
-import '../../../core/utills/enums_manager.dart';
+import '../../../core/utils/color_manager.dart';
+import '../../../core/utils/enums_manager.dart';
 import '../../domain/entities/movie_detail.dart';
 
 class MovieDetailScreen extends StatelessWidget {
@@ -125,7 +125,8 @@ class MovieDetailContent extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(AppSize.s4),
                               ),
                               child: Text(
-                                state.movieDetail!.releaseDate.split('-')[AppConstants.cI0],
+                                state.movieDetail!.releaseDate
+                                    .split('-')[AppConstants.cI0],
                                 style: const TextStyle(
                                   fontSize: AppFontSize.s16,
                                   fontWeight: AppFontWeight.medium,
@@ -143,7 +144,8 @@ class MovieDetailContent extends StatelessWidget {
                                 ),
                                 const SizedBox(width: AppSize.s4),
                                 Text(
-                                  (state.movieDetail!.voteAverage / AppConstants.cI2)
+                                  (state.movieDetail!.voteAverage /
+                                          AppConstants.cI2)
                                       .toStringAsFixed(AppConstants.cI1),
                                   style: const TextStyle(
                                     fontSize: AppFontSize.s16,
@@ -344,8 +346,10 @@ class MovieDetailContent extends StatelessWidget {
                             ),
                           ),
                         ),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
+                        errorWidget: (context, url, error) => const Icon(
+                          Icons.error,
+                          color: AppColor.white,
+                        ),
                         height: AppSize.s170,
                         fit: BoxFit.cover,
                       ),

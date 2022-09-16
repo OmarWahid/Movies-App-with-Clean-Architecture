@@ -4,9 +4,11 @@ class MovieState extends Equatable {
   final List<Movie> nowPlayingMovies;
   final RequestState nowPlayingState;
   final String nowPlayingMessage;
+
   final List<Movie> popularMovies;
   final RequestState popularState;
   final String popularMessage;
+
   final List<Movie> topRatedMovies;
   final RequestState topRatedState;
   final String topRatedMessage;
@@ -48,8 +50,7 @@ class MovieState extends Equatable {
   }
 
   @override
-  List<Object> get props =>
-      [
+  List<Object> get props => [
         nowPlayingMovies,
         nowPlayingState,
         nowPlayingMessage,
@@ -60,8 +61,4 @@ class MovieState extends Equatable {
         topRatedState,
         topRatedMessage,
       ];
-
-// class MovieInitial extends MovieState {}
-
 }
-

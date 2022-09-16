@@ -1,16 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_app_with_clean_architecture/core/utills/color_manager.dart';
-import 'package:movie_app_with_clean_architecture/core/utills/constants_manager.dart';
-import 'package:movie_app_with_clean_architecture/core/utills/font_manager.dart';
-import 'package:movie_app_with_clean_architecture/core/utills/strings_manager.dart';
-import 'package:movie_app_with_clean_architecture/core/utills/values_manager.dart';
+import 'package:movie_app_with_clean_architecture/core/utils/color_manager.dart';
+import 'package:movie_app_with_clean_architecture/core/utils/constants_manager.dart';
+import 'package:movie_app_with_clean_architecture/core/utils/font_manager.dart';
+import 'package:movie_app_with_clean_architecture/core/utils/strings_manager.dart';
+import 'package:movie_app_with_clean_architecture/core/utils/values_manager.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../core/network/api_constance.dart';
 import '../../../core/services/services_locator.dart';
-import '../../../core/utills/enums_manager.dart';
-import '../../../core/utills/routes_manager.dart';
+import '../../../core/utils/enums_manager.dart';
+import '../../../core/utils/routes_manager.dart';
 import '../controller/movie_bloc/movie_bloc.dart';
 
 class MovieTopRatedScreen extends StatelessWidget {
@@ -23,10 +23,8 @@ class MovieTopRatedScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: AppColor.blueBlack,
         appBar: AppBar(
-          title: const Text(
-            AppStrings.topRatedMovieAppbar,
-            style: TextStyle(color: AppColor.white),
-          ),
+          title: const Text(AppStrings.topRatedMovieAppbar,
+              style: TextStyle(color: AppColor.white)),
           backgroundColor: AppColor.blueBlack,
           centerTitle: true,
         ),
@@ -109,7 +107,10 @@ class MovieTopRatedItems extends StatelessWidget {
                                   ),
                                 ),
                                 errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
+                                    const Icon(
+                                  Icons.error,
+                                  color: AppColor.white,
+                                ),
                                 height: AppSize.s170,
                                 fit: BoxFit.cover,
                               ),
@@ -147,9 +148,9 @@ class MovieTopRatedItems extends StatelessWidget {
                                         borderRadius:
                                             BorderRadius.circular(AppSize.s4),
                                       ),
-
                                       child: Text(
-                                        movies.releaseDate.split('-')[AppConstants.cI0],
+                                        movies.releaseDate
+                                            .split('-')[AppConstants.cI0],
                                         style: const TextStyle(
                                           fontSize: AppFontSize.s12,
                                           fontWeight: AppFontWeight.medium,
@@ -167,8 +168,10 @@ class MovieTopRatedItems extends StatelessWidget {
                                         ),
                                         const SizedBox(width: AppSize.s4),
                                         Text(
-                                          (movies.voteAverage / AppConstants.cI2)
-                                              .toStringAsFixed(AppConstants.cI1),
+                                          (movies.voteAverage /
+                                                  AppConstants.cI2)
+                                              .toStringAsFixed(
+                                                  AppConstants.cI1),
                                           style: const TextStyle(
                                             fontSize: AppFontSize.s12,
                                             fontWeight: AppFontWeight.medium,

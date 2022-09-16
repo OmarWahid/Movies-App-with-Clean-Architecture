@@ -29,28 +29,4 @@ class Movie extends Equatable {
         releaseDate,
         voteAverage,
       ];
-
-//
-// Movie.fromJson(Map<String, dynamic> json) {
-//   backdropPath = json['backdrop_path'];
-//   genreIds = json['genre_ids'].cast<int>();
-//   id = json['id'];
-//   overview = json['overview'];
-//   title = json['title'];
-//   releaseDate = json['release_date'];
-//   voteAverage = json['vote_average'];
-// }
-//
-// Map<String, dynamic> toJson() {
-//   final Map<String, dynamic> data = new Map<String, dynamic>();
-//   data['backdrop_path'] = this.backdropPath;
-//   data['genre_ids'] = this.genreIds;
-//   data['id'] = this.id;
-//   data['overview'] = this.overview;
-//   data['title'] = this.title;
-//   data['release_date'] = this.releaseDate;
-//   data['vote_average'] = this.voteAverage;
-//   return data;
-// }
-
 }

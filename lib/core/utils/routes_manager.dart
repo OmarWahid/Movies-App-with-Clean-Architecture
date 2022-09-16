@@ -10,10 +10,6 @@ class Routes {
   static const String movieDetailsRoute = "/movieDetails";
   static const String movieTopRatedRoute = "/movieTopRated";
   static const String moviePopularRoute = "/moviePopular";
-  static const String forgotPasswordRoute = "/forgotPassword";
-  static const String onBoardingRoute = "/onBoarding";
-  static const String mainRoute = "/main";
-  static const String storeDetailsRoute = "/storeDetails";
 }
 
 class RouteGenerator {
@@ -40,9 +36,7 @@ class RouteGenerator {
   static Route<dynamic> unDefinedRoute() {
     return MaterialPageRoute(
         builder: (_) => Scaffold(
-              appBar: AppBar(
-                title: const Text(AppStrings.noRouteFound),
-              ),
+              appBar: AppBar(title: const Text(AppStrings.noRouteFound)),
               body: const Center(child: Text(AppStrings.noRouteFound)),
             ));
   }

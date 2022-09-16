@@ -3,26 +3,24 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_app_with_clean_architecture/core/utills/constants_manager.dart';
-import 'package:movie_app_with_clean_architecture/core/utills/font_manager.dart';
-import 'package:movie_app_with_clean_architecture/core/utills/strings_manager.dart';
-import 'package:movie_app_with_clean_architecture/core/utills/values_manager.dart';
+import 'package:movie_app_with_clean_architecture/core/utils/constants_manager.dart';
+import 'package:movie_app_with_clean_architecture/core/utils/font_manager.dart';
+import 'package:movie_app_with_clean_architecture/core/utils/strings_manager.dart';
+import 'package:movie_app_with_clean_architecture/core/utils/values_manager.dart';
 import '../../../core/network/api_constance.dart';
-import '../../../core/utills/color_manager.dart';
-import '../../../core/utills/enums_manager.dart';
-import '../../../core/utills/routes_manager.dart';
+import '../../../core/utils/color_manager.dart';
+import '../../../core/utils/enums_manager.dart';
+import '../../../core/utils/routes_manager.dart';
 import '../controller/movie_bloc/movie_bloc.dart';
 
 class PlayingMovieComponent extends StatelessWidget {
   const PlayingMovieComponent({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MovieBloc, MovieState>(
-      // buildWhen: (previous, current) =>
-      //     previous.nowPlayingState != current.nowPlayingState,
+      buildWhen: (previous, current) =>
+          previous.nowPlayingState != current.nowPlayingState,
       builder: (context, state) {
-        print('is playingggggggggggggggggggggggggggggg');
         switch (state.nowPlayingState) {
           case RequestState.loading:
             return const SizedBox(

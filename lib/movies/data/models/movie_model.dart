@@ -14,7 +14,6 @@ class MovieModel extends Movie {
     return MovieModel(
       backdropPath: json['backdrop_path'],
       genreIds: json['genre_ids'].cast<int>(),
-      // genreIds: List<int>.from(json['genre_ids'].map((e) => e)),
       id: json['id'],
       overview: json['overview'],
       title: json['title'],

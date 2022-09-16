@@ -2,15 +2,11 @@ part of 'movie_details_bloc.dart';
 
 class MovieDetailsState extends Equatable {
   final RequestState movieDetailsState;
-
   final String messageMovieDetails;
-
   final MovieDetail? movieDetail;
 
   final RequestState movieRecommendationsState;
-
   final String messageMovieRecommendations;
-
   final List<MovieRecommendations>? movieRecommendations;
 
   const MovieDetailsState({
@@ -29,14 +25,15 @@ class MovieDetailsState extends Equatable {
     RequestState? movieRecommendationsState,
     String? messageMovieRecommendations,
     List<MovieRecommendations>? movieRecommendations,
-
   }) {
     return MovieDetailsState(
       movieDetailsState: movieDetailsState ?? this.movieDetailsState,
       messageMovieDetails: messageMovieDetails ?? this.messageMovieDetails,
       movieDetail: movieDetail ?? this.movieDetail,
-      movieRecommendationsState: movieRecommendationsState ?? this.movieRecommendationsState,
-      messageMovieRecommendations: messageMovieRecommendations ?? this.messageMovieRecommendations,
+      movieRecommendationsState:
+          movieRecommendationsState ?? this.movieRecommendationsState,
+      messageMovieRecommendations:
+          messageMovieRecommendations ?? this.messageMovieRecommendations,
       movieRecommendations: movieRecommendations ?? this.movieRecommendations,
     );
   }
@@ -49,6 +46,5 @@ class MovieDetailsState extends Equatable {
         movieRecommendationsState,
         messageMovieRecommendations,
         movieRecommendations,
-
       ];
 }

@@ -26,5 +26,4 @@ class MovieDetailsModel extends MovieDetail {
       voteAverage: json['vote_average'].toDouble(),
     );
   }
-
 }

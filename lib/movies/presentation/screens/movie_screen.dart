@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movie_app_with_clean_architecture/core/utills/constants_manager.dart';
-import 'package:movie_app_with_clean_architecture/core/utills/font_manager.dart';
+import 'package:movie_app_with_clean_architecture/core/utils/constants_manager.dart';
+import 'package:movie_app_with_clean_architecture/core/utils/font_manager.dart';
 import 'package:movie_app_with_clean_architecture/movies/presentation/components/playing_movie_component.dart';
 import '../../../core/services/services_locator.dart';
-import '../../../core/utills/color_manager.dart';
-import '../../../core/utills/routes_manager.dart';
-import '../../../core/utills/strings_manager.dart';
-import '../../../core/utills/values_manager.dart';
+import '../../../core/utils/color_manager.dart';
+import '../../../core/utils/routes_manager.dart';
+import '../../../core/utils/strings_manager.dart';
+import '../../../core/utils/values_manager.dart';
 import '../components/popular_movie_component.dart';
 import '../components/top_rated_movie_component.dart';
 import '../controller/movie_bloc/movie_bloc.dart';
@@ -113,7 +113,7 @@ class MovieScreen extends StatelessWidget {
                             ),
                             Icon(
                               Icons.arrow_forward_ios,
-                              size: AppSize.s4,
+                              size: AppSize.s16,
                               color: AppColor.white,
                             )
                           ],

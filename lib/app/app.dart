@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../core/utills/color_manager.dart';
-import '../core/utills/routes_manager.dart';
+import '../core/utils/routes_manager.dart';
+import '../core/utils/theme_manager.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp._internal();
@@ -18,15 +18,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.grey,
-        scaffoldBackgroundColor: AppColor.darkGrey,
-        appBarTheme: const AppBarTheme(
-          iconTheme: IconThemeData(color: AppColor.white),
-
-          elevation: 0,
-        ),
-      ),
+      theme: getApplicationTheme(),
       initialRoute: Routes.movieRoute,
       onGenerateRoute: RouteGenerator.getRoute,
     );

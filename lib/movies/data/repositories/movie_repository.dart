@@ -55,7 +55,8 @@ class MovieRepository implements BaseMovieRepository {
   @override
   Future<Either<Failure, List<MovieRecommendations>>> getRecommendationsMovie(
       int movieId) async {
-    final result = await baseMovieRemoteDataSource.getRecommendationsMovie(movieId);
+    final result =
+        await baseMovieRemoteDataSource.getRecommendationsMovie(movieId);
     try {
       return Right(result);
     } on ServerException catch (e) {
