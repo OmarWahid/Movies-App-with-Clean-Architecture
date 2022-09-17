@@ -1,6 +1,5 @@
 # movie_app_with_clean_architecture
 This app was created by
-
 1- CLEAN ARCHITECTURE
 
 2- API
